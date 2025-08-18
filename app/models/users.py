@@ -7,6 +7,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.sql.sqltypes import DateTime
 from sqlalchemy.sql.sqltypes import Integer
 from sqlalchemy.sql.sqltypes import String
+from sqlalchemy.sql.sqltypes import Boolean
 from werkzeug.security import generate_password_hash
 
 from app.sessions.db import engine
@@ -19,8 +20,12 @@ class User(Base):  # type: ignore
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(50))
+    lname= Column(String(50))
+    address=Column(String(50))
     email = Column(String(50), unique=True)
     mobile = Column(String(50), unique=True)
+    provider = Column(String(50), default=False)
+    onboarding_completed = Column(Boolean, default=False)
     password = Column(String(200))  # Store the password hash
     created_at = Column(DateTime, server_default=func.current_timestamp())
     updated_at = Column(DateTime)

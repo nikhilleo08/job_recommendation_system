@@ -7,11 +7,11 @@ from logging.config import fileConfig
 from dotenv import load_dotenv
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
+from app.models.users import Base
 from alembic import context  # type: ignore
 from app.config.base import settings
-
-load_dotenv()
+from pathlib import Path
+load_dotenv(f'{Path(__file__).parent.parent}/.env.local')
 
 print("==" * 50, "\n\n\n", "OS ENVIRONMENT", os.environ, "\n\n\n", "==" * 50)
 
@@ -53,7 +53,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

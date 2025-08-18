@@ -80,3 +80,4 @@ def create_local_session() -> Generator[Session, None, None]:
 
 
 Base = declarative_base()
+

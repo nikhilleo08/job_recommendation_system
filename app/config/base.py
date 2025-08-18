@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pydantic import BaseSettings
+from pydantic import BaseSettings , SecretStr , AnyHttpUrl 
 
 
 class DBSettings(BaseSettings):
@@ -21,6 +21,14 @@ class Settings(DBSettings):
     SLACK_WEBHOOK_URL: str | None
     ALLOWED_HOSTS: list = ["*"]
     CACHE_MAX_AGE: int = 60
+
+    GOOGLE_CLIENT_ID: str
+    GOOGLE_CLIENT_SECRET: SecretStr
+    GOOGLE_REDIRECT_URI: AnyHttpUrl
+    SECRET_KEY:str
+    ACCESS_TOKEN_EXPIRE_MINUTES:int
+    ALGORITHM:str
+
 
     class Config:
         env_file = ".env.local"
