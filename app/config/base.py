@@ -23,9 +23,10 @@ class Settings(DBSettings):
     CACHE_MAX_AGE: int = 60
 
     GOOGLE_CLIENT_ID: str
-    GOOGLE_CLIENT_SECRET: SecretStr
+    GOOGLE_CLIENT_SECRET: str
     GOOGLE_REDIRECT_URI: AnyHttpUrl
     SECRET_KEY:str
+    JWT_SECRET_KEY:str
     ACCESS_TOKEN_EXPIRE_MINUTES:int
     ALGORITHM:str
 

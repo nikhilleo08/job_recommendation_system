@@ -81,8 +81,6 @@ async def oauth_login(provider: str, request: Request):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to initiate {provider} login: {e}")
 
-    # return await client.authorize_redirect(request, redirect_uri)
-
 
 # OAuth Callback
 @user_router.get("/auth/callback/{provider}", tags=["OAuth"])
@@ -120,7 +118,6 @@ async def oauth_callback(provider: str, request: Request, db: Session = Depends(
 
     token = generate_jwt(user)
 
-    # ✅ Redirect based on onboarding status
     if user.onboarding_completed:
         return RedirectResponse(
             url=f"http://localhost:5173/dashboard?"
@@ -128,7 +125,7 @@ async def oauth_callback(provider: str, request: Request, db: Session = Depends(
         )
     else:
         return RedirectResponse(
-            url=f"http://localhost:5173/onboarding?"
+            url=f"http://localhost:5173/dashboard?"
                 f"token={token}&user_id={user.id}&onboard=false"
         )
 

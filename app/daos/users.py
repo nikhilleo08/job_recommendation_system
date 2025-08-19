@@ -22,13 +22,9 @@ def create_jwt(user_id: int):
     expire = datetime.utcnow() + timedelta(minutes=expire_minutes)
 
     payload = {"sub": str(user_id), "exp": int(expire.timestamp())}
-    return jwt.encode(payload, str(settings.SECRET_KEY), algorithm=settings.ALGORITHM)
+    return jwt.encode(payload, str(settings.JWT_SECRET_KEY), algorithm=settings.ALGORITHM)
 
-# ----------------------
-# Synchronous DAO functions
-# ----------------------
-# def get_user_by_email(email: str, db_session: Session) -> User | None:
-#     return db_session.query(User).filter(User.email == email).first()
+
 def get_user_by_email(email: str, provider: str, db_session: Session) -> User | None:
     return db_session.query(User).filter(User.email == email, User.provider == provider).first()
 
